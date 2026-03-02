@@ -37,24 +37,24 @@ npx skills add zc277584121/chrome-replay-skill -a cursor
 npx skills add zc277584121/chrome-replay-skill -a cursor -g
 ```
 
-### Windsurf
+### Codex
 
 ```bash
 # Project-level
-npx skills add zc277584121/chrome-replay-skill -a windsurf
+npx skills add zc277584121/chrome-replay-skill -a codex
 
 # Global
-npx skills add zc277584121/chrome-replay-skill -a windsurf -g
+npx skills add zc277584121/chrome-replay-skill -a codex -g
 ```
 
-### GitHub Copilot
+### OpenCode
 
 ```bash
 # Project-level
-npx skills add zc277584121/chrome-replay-skill -a github-copilot
+npx skills add zc277584121/chrome-replay-skill -a opencode
 
 # Global
-npx skills add zc277584121/chrome-replay-skill -a github-copilot -g
+npx skills add zc277584121/chrome-replay-skill -a opencode -g
 ```
 
 ### Other Agents
@@ -65,7 +65,7 @@ npx skills add zc277584121/chrome-replay-skill -a github-copilot -g
 npx skills add zc277584121/chrome-replay-skill -a <agent-name>
 ```
 
-Common agent names: `codex`, `cline`, `opencode`, `roo`, `gemini-cli`, `goose`, `kilo`, `augment`.
+Common agent names: `windsurf`, `github-copilot`, `cline`, `roo`, `gemini-cli`, `goose`, `kilo`, `augment`.
 
 > **Project vs Global**: Project-level installs the skill into the current project directory (e.g., `.claude/skills/`). Global (`-g`) installs to your home directory (e.g., `~/.claude/skills/`) so it's available across all projects.
 
