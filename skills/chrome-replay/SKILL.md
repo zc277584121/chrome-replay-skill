@@ -7,7 +7,7 @@ description: Replay Chrome DevTools Recorder exports in a live browser session u
 
 Replay a Chrome DevTools Recorder export in the user's live browser via the Chrome DevTools MCP.
 
-> **Prerequisite**: Chrome MCP must be connected. See `context.md` if unsure.
+> **Prerequisite**: Chrome MCP must be connected. See `references/chrome-devtools-mcp-setup.md` if unsure.
 
 ---
 
@@ -107,4 +107,4 @@ When pausing, explain clearly: what step you are on, what you expected, and what
 
 ---
 
-> For MCP setup, known issues, and Chrome startup instructions, see [`context.md`](./context.md).
+> For MCP setup, known issues, and Chrome startup instructions, see [`references/chrome-devtools-mcp-setup.md`](./references/chrome-devtools-mcp-setup.md).
