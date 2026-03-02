@@ -11,7 +11,7 @@ A skill for AI coding agents to replay [Chrome DevTools Recorder](https://develo
 ## Files
 
 - `SKILL.md` — the skill instructions for the AI agent
-- `context.md` — Chrome DevTools MCP setup reference and known issues
+- `references/chrome-devtools-mcp-setup.md` — Chrome DevTools MCP setup reference and known issues
 
 ## Installation
 
@@ -69,6 +69,18 @@ Common agent names: `windsurf`, `github-copilot`, `cline`, `roo`, `gemini-cli`, 
 
 > **Project vs Global**: Project-level installs the skill into the current project directory (e.g., `.claude/skills/`). Global (`-g`) installs to your home directory (e.g., `~/.claude/skills/`) so it's available across all projects.
 
+## Updating
+
+```bash
+# Check if updates are available
+npx skills check
+
+# Update all globally installed skills to latest
+npx skills update
+```
+
+> **Note**: `npx skills update` only works for globally installed skills (`-g`). For project-level installs, re-run the `npx skills add` command to get the latest version.
+
 ## Requirements
 
-Chrome DevTools MCP must be configured and connected. See `context.md` for setup instructions, or refer to the [official Chrome DevTools MCP repository](https://github.com/ChromeDevTools/chrome-devtools-mcp).
+Chrome DevTools MCP must be configured and connected. See `references/chrome-devtools-mcp-setup.md` for setup instructions, or refer to the [official Chrome DevTools MCP repository](https://github.com/ChromeDevTools/chrome-devtools-mcp).
