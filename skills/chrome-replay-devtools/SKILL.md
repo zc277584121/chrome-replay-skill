@@ -107,4 +107,16 @@ When pausing, explain clearly: what step you are on, what you expected, and what
 
 ---
 
+## Known Limitations
+
+1. **`evaluate_script` is main-frame only**: JavaScript executed via `evaluate_script` runs in the top-level frame and **cannot access iframe content** — even though `take_snapshot` and `click`/`fill` (by uid) can penetrate iframes via the CDP accessibility tree. If you need to run JS inside an iframe, use `evaluate_script` to traverse the DOM manually: `document.querySelector('iframe').contentDocument...` (same-origin iframes only).
+
+2. **`fill` on contenteditable may need multiple uid attempts**: For rich text editors (`contenteditable` divs like LinkedIn message boxes, Gmail compose), `fill` may fail on the first uid. Re-take the snapshot and try a different uid for the same element — the CDP accessibility tree sometimes exposes the same element under multiple uids across frames.
+
+3. **Snapshot can be very large**: Complex pages (e.g., social media feeds) produce snapshots with thousands of nodes. Pipe the snapshot to a file and search with `grep` rather than reading the entire output inline.
+
+4. **`Network.enable timed out`**: Chrome suspends inactive tabs. If MCP times out connecting to a page, click through the tab manually to wake it, then retry. See `references/chrome-devtools-mcp-setup.md` for more details.
+
+---
+
 > For MCP setup, known issues, and Chrome startup instructions, see [`references/chrome-devtools-mcp-setup.md`](./references/chrome-devtools-mcp-setup.md).
