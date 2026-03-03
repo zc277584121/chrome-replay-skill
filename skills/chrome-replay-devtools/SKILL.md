@@ -1,5 +1,5 @@
 ---
-name: chrome-replay
+name: chrome-replay-devtools
 description: Replay Chrome DevTools Recorder exports in a live browser session using Chrome DevTools MCP. Handles JSON, Puppeteer JS, and @puppeteer/replay JS formats with semantic selector matching.
 ---
 

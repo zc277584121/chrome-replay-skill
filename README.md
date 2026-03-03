@@ -1,60 +1,64 @@
 # chrome-replay-skill
 
-A skill for AI coding agents to replay [Chrome DevTools Recorder](https://developer.chrome.com/docs/devtools/recorder) exports in a live browser session, using the [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp).
+A collection of skills for AI coding agents to replay [Chrome DevTools Recorder](https://developer.chrome.com/docs/devtools/recorder) exports in a live browser session.
+
+Two backend options are provided — pick the one that fits your setup:
+
+## Available Skills
+
+| Skill | Backend | Best for |
+|-------|---------|----------|
+| [`chrome-replay-devtools`](./skills/chrome-replay-devtools/) | [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp) | Agents with MCP support (Claude Code, Cursor, etc.) |
+| [`chrome-replay-agent-browser`](./skills/chrome-replay-agent-browser/) | [agent-browser CLI](https://github.com/vercel-labs/agent-browser) (Playwright) | Any agent with shell access; no MCP required |
+
+### Which should I use?
+
+- **chrome-replay-devtools** — Replays inside your existing Chrome session via Chrome DevTools Protocol. Best iframe support (CDP accessibility tree penetrates iframes). Requires an MCP-capable agent and Chrome DevTools MCP to be configured.
+- **chrome-replay-agent-browser** — Replays via shell commands using the agent-browser CLI (Playwright-based). Works with any agent that can run shell commands. Can connect to existing Chrome (`--auto-connect`) or launch a fresh browser. No MCP configuration needed. Note: limited iframe support — see the skill's [Known Limitations](./skills/chrome-replay-agent-browser/SKILL.md#known-limitations).
 
 ## What it does
 
-- Accepts recordings exported from Chrome DevTools Recorder (JSON, Puppeteer JS, or @puppeteer/replay JS)
-- Semantically replays the recorded steps — handles stale selectors, unexpected popups, and page state differences
-- Pauses and asks for human input when login, CAPTCHAs, or destructive actions are encountered
+Both skills share the same core capabilities:
 
-## Files
+- Accept recordings exported from Chrome DevTools Recorder (JSON, Puppeteer JS, or @puppeteer/replay JS)
+- Semantically replay the recorded steps — handle stale selectors, unexpected popups, and page state differences
+- Pause and ask for human input when login, CAPTCHAs, or destructive actions are encountered
 
-- `SKILL.md` — the skill instructions for the AI agent
-- `references/chrome-devtools-mcp-setup.md` — Chrome DevTools MCP setup reference and known issues
+## How to Record
+
+1. Open the target webpage in Chrome
+2. Open DevTools (F12)
+3. Click **"More tools"** → **"Recorder"** (or search for "Recorder" in the DevTools command menu)
+4. Click **"Create a new recording"**
+5. Click **"Start recording"**
+6. Perform the actions you want to replay (click, type, navigate, etc.)
+7. Click **"End recording"**
+8. Export as **JSON** (recommended), Puppeteer JS, or @puppeteer/replay JS
 
 ## Installation
 
-Install this skill using [npx skills](https://skills.sh):
+Install using [npx skills](https://skills.sh):
 
-### Claude Code
+### Install both skills
 
 ```bash
-# Project-level (current project only)
-npx skills add zc277584121/chrome-replay-skill -a claude-code
+npx skills add zc277584121/chrome-replay-skill -a <agent-name>
 
 # Global (available in all projects)
+npx skills add zc277584121/chrome-replay-skill -a <agent-name> -g
+```
+
+### Examples
+
+```bash
+# Claude Code
 npx skills add zc277584121/chrome-replay-skill -a claude-code -g
-```
 
-### Cursor
-
-```bash
-# Project-level
-npx skills add zc277584121/chrome-replay-skill -a cursor
-
-# Global
+# Cursor
 npx skills add zc277584121/chrome-replay-skill -a cursor -g
-```
 
-### Codex
-
-```bash
-# Project-level
-npx skills add zc277584121/chrome-replay-skill -a codex
-
-# Global
+# Codex
 npx skills add zc277584121/chrome-replay-skill -a codex -g
-```
-
-### OpenCode
-
-```bash
-# Project-level
-npx skills add zc277584121/chrome-replay-skill -a opencode
-
-# Global
-npx skills add zc277584121/chrome-replay-skill -a opencode -g
 ```
 
 ### Other Agents
@@ -65,7 +69,7 @@ npx skills add zc277584121/chrome-replay-skill -a opencode -g
 npx skills add zc277584121/chrome-replay-skill -a <agent-name>
 ```
 
-Common agent names: `windsurf`, `github-copilot`, `cline`, `roo`, `gemini-cli`, `goose`, `kilo`, `augment`.
+Common agent names: `windsurf`, `github-copilot`, `cline`, `roo`, `gemini-cli`, `goose`, `kilo`, `augment`, `opencode`.
 
 > **Project vs Global**: Project-level installs the skill into the current project directory (e.g., `.claude/skills/`). Global (`-g`) installs to your home directory (e.g., `~/.claude/skills/`) so it's available across all projects.
 
@@ -83,4 +87,5 @@ npx skills update
 
 ## Requirements
 
-Chrome DevTools MCP must be configured and connected. See `references/chrome-devtools-mcp-setup.md` for setup instructions, or refer to the [official Chrome DevTools MCP repository](https://github.com/ChromeDevTools/chrome-devtools-mcp).
+- **chrome-replay-devtools**: Chrome DevTools MCP must be configured and connected. See [setup guide](./skills/chrome-replay-devtools/references/chrome-devtools-mcp-setup.md) or the [official Chrome DevTools MCP repo](https://github.com/ChromeDevTools/chrome-devtools-mcp).
+- **chrome-replay-agent-browser**: agent-browser CLI must be installed (`npm install -g agent-browser`). See [setup guide](./skills/chrome-replay-agent-browser/references/agent-browser-setup.md) or the [agent-browser repo](https://github.com/vercel-labs/agent-browser).
